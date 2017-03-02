@@ -18,17 +18,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
-
-    private Button btn_record1,btn_record2, btn_play1, btn_play2;
-    private MediaPlayer play;
-    private MediaRecorder record;
-    private String MyFile1 = "file";
-    private File fileout1;
-
-    private String MyFile2 = "file";
-    private File fileout2;
-    private SoundPool sp = new SoundPool(99, AudioManager.STREAM_MUSIC, 0);
-    private EditText et1,et2;
+    Sound[] sounds=new Sound[9];
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -39,99 +29,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btn_record1 = (Button) findViewById(R.id.btn_record1);
-        btn_record1.setText("record");
-
-        btn_record2 = (Button) findViewById(R.id.btn_record2);
-        btn_record2.setText("record");
-        btn_play1 = (Button) findViewById(R.id.btn_play1);
-        btn_play2 = (Button) findViewById(R.id.btn_play2);
-
-        et1=(EditText)findViewById(R.id.editText);
-        et2=(EditText)findViewById(R.id.editText2);
-        MyFile1 = "temprecord1.gpp3";//gpp3 is an easy media file type
-
-        fileout1 = new File(MainActivity.this.getFilesDir(), MyFile1);
-        ////////////////////////////////////////dsfg///////////////////////
-        btn_record1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (btn_record1.getText() == "record") {//if not already recording
-                    if (fileout1 != null)
-                        fileout1.delete();//deletes any file that exists at the location
-                    if (record != null)
-                        record.release();//resets the mediarecorder
-                    record = new MediaRecorder();
-                    record.setAudioSource(MediaRecorder.AudioSource.MIC);//sets audio source to the microphone
-                    record.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);//sets format to match file type
-                    record.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-                    record.setOutputFile(fileout1.getPath());
-                    try {
-                        record.prepare();
-                    } catch (Exception e) {
-                    }
-                    record.start();//start recording to file
-                    btn_record1.setText("stop");
-                } else {//if already recording
-                    if (record != null) {
-                        record.stop();//stop recording to file
-                        record.release();
-                        btn_record1.setText("record");
-                    }
-                }
-            }
-        });
-        //////////////////////////////////////////dfsgdsf//////////////////////////
-        MyFile2 = "temprecord2.gpp3";//gpp3 is an easy media file type
-
-        fileout2 = new File(MainActivity.this.getFilesDir(), MyFile2);
-        btn_record2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (btn_record2.getText() == "record") {//if not already recording
-                    if (fileout2 != null)
-                        fileout2.delete();//deletes any file that exists at the location
-                    if (record != null)
-                        record.release();//resets the mediarecorder
-                    record = new MediaRecorder();
-                    record.setAudioSource(MediaRecorder.AudioSource.MIC);//sets audio source to the microphone
-                    record.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);//sets format to match file type
-                    record.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-                    record.setOutputFile(fileout2.getPath());
-                    try {
-                        record.prepare();
-                    } catch (Exception e) {
-                    }
-                    record.start();//start recording to file
-                    btn_record2.setText("stop");
-                } else {//if already recording
-                    if (record != null) {
-                        record.stop();//stop recording to file
-                        record.release();
-                        btn_record2.setText("record");
-                    }
-                }
-            }
-        });
-        //////////////////////////////////////////////////sdghsdfg//////////////////////////
-        btn_play1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int loop1=Integer.parseInt(et1.getText().toString());
-                int loop2=Integer.parseInt(et2.getText().toString());
-                sp.load(fileout1.getPath(), 1);
-                sp.load(fileout2.getPath(),1);
-                sp.play(1, 0, 1, 1, 1, 1);
-                sp.play(2,1,0,1,1,1);
-                //sp.play(id, left, right, priority, loop, rate)
-            }
-
-            ;
-        });
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        {
+            //gpp3 is an easy media file type
+            sounds[1] = new Sound(new File(MainActivity.this.getFilesDir(), "sound1.gpp3"), (Button) findViewById(R.id.btn1));
+            sounds[2] = new Sound(new File(MainActivity.this.getFilesDir(), "sound2.gpp3"), (Button) findViewById(R.id.btn2));
+            sounds[3] = new Sound(new File(MainActivity.this.getFilesDir(), "sound3.gpp3"), (Button) findViewById(R.id.btn3));
+            sounds[4] = new Sound(new File(MainActivity.this.getFilesDir(), "sound4.gpp3"), (Button) findViewById(R.id.btn4));
+            sounds[5] = new Sound(new File(MainActivity.this.getFilesDir(), "sound5.gpp3"), (Button) findViewById(R.id.btn5));
+            sounds[6] = new Sound(new File(MainActivity.this.getFilesDir(), "sound6.gpp3"), (Button) findViewById(R.id.btn6));
+            sounds[7] = new Sound(new File(MainActivity.this.getFilesDir(), "sound7.gpp3"), (Button) findViewById(R.id.btn7));
+            sounds[8] = new Sound(new File(MainActivity.this.getFilesDir(), "sound8.gpp3"), (Button) findViewById(R.id.btn8));
+            sounds[9] = new Sound(new File(MainActivity.this.getFilesDir(), "sound9.gpp3"), (Button) findViewById(R.id.btn9));
+        }
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+
 
     @Override
     public void onStart() {
