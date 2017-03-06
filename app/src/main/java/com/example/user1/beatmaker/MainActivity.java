@@ -1,5 +1,6 @@
 package com.example.user1.beatmaker;
 
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -31,17 +32,36 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         {
             //gpp3 is an easy media file type
-            sounds[1] = new Sound(new File(MainActivity.this.getFilesDir(), "sound1.gpp3"), (Button) findViewById(R.id.btn1));
-            sounds[2] = new Sound(new File(MainActivity.this.getFilesDir(), "sound2.gpp3"), (Button) findViewById(R.id.btn2));
-            sounds[3] = new Sound(new File(MainActivity.this.getFilesDir(), "sound3.gpp3"), (Button) findViewById(R.id.btn3));
-            sounds[4] = new Sound(new File(MainActivity.this.getFilesDir(), "sound4.gpp3"), (Button) findViewById(R.id.btn4));
-            sounds[5] = new Sound(new File(MainActivity.this.getFilesDir(), "sound5.gpp3"), (Button) findViewById(R.id.btn5));
-            sounds[6] = new Sound(new File(MainActivity.this.getFilesDir(), "sound6.gpp3"), (Button) findViewById(R.id.btn6));
-            sounds[7] = new Sound(new File(MainActivity.this.getFilesDir(), "sound7.gpp3"), (Button) findViewById(R.id.btn7));
-            sounds[8] = new Sound(new File(MainActivity.this.getFilesDir(), "sound8.gpp3"), (Button) findViewById(R.id.btn8));
-            sounds[9] = new Sound(new File(MainActivity.this.getFilesDir(), "sound9.gpp3"), (Button) findViewById(R.id.btn9));
+            sounds[0] = new Sound(new File(MainActivity.this.getFilesDir(), "sound1.gpp3"), (Button) findViewById(R.id.btn1));
+            sounds[1] = new Sound(new File(MainActivity.this.getFilesDir(), "sound2.gpp3"), (Button) findViewById(R.id.btn2));
+            sounds[2] = new Sound(new File(MainActivity.this.getFilesDir(), "sound3.gpp3"), (Button) findViewById(R.id.btn3));
+            sounds[3] = new Sound(new File(MainActivity.this.getFilesDir(), "sound4.gpp3"), (Button) findViewById(R.id.btn4));
+            sounds[4] = new Sound(new File(MainActivity.this.getFilesDir(), "sound5.gpp3"), (Button) findViewById(R.id.btn5));
+            sounds[5] = new Sound(new File(MainActivity.this.getFilesDir(), "sound6.gpp3"), (Button) findViewById(R.id.btn6));
+            sounds[6] = new Sound(new File(MainActivity.this.getFilesDir(), "sound7.gpp3"), (Button) findViewById(R.id.btn7));
+            sounds[7] = new Sound(new File(MainActivity.this.getFilesDir(), "sound8.gpp3"), (Button) findViewById(R.id.btn8));
+            sounds[8] = new Sound(new File(MainActivity.this.getFilesDir(), "sound9.gpp3"), (Button) findViewById(R.id.btn9));
         }
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+
+        for(final Sound sound : sounds) {
+            sound.getBtn().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sound.play();
+                }
+            });
+            sound.getBtn().setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Intent myIntent=new Intent(MainActivity.this,RecordActivity.class);
+                    myIntent.putExtra("file",sound.getFileout());
+                    startActivity(myIntent);
+                    return false;
+                }
+            });
+        }
     }
 
 
