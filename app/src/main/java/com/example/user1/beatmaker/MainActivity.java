@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             sound.getBtn().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    sound.play();
+                    sound.play(MainActivity.this);
                 }
             });
             sound.getBtn().setOnLongClickListener(new View.OnLongClickListener() {
