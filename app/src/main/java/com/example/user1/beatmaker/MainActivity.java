@@ -1,11 +1,14 @@
 package com.example.user1.beatmaker;
 
+import android.Manifest;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.media.SoundPool;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         {
             //gpp3 is an easy media file type
@@ -42,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             sounds[7] = new Sound(new File(MainActivity.this.getFilesDir(), "sound8.gpp3"), (Button) findViewById(R.id.btn8));
             sounds[8] = new Sound(new File(MainActivity.this.getFilesDir(), "sound9.gpp3"), (Button) findViewById(R.id.btn9));
         }
+        Button btnBeat=(Button)findViewById(R.id.btn_beat);
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
 
@@ -62,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+        btnBeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sounds[0].play(MainActivity.this);
+                assist.waitFor(2000);
+                sounds[1].play(MainActivity.this);
+            }
+        });
     }
 
 

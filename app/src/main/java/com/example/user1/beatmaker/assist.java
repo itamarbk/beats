@@ -1,6 +1,7 @@
 package com.example.user1.beatmaker;
 
 import android.media.MediaRecorder;
+import android.util.Log;
 import android.widget.Button;
 
 import java.io.File;
@@ -15,6 +16,7 @@ public class assist {
             public void run(){
                 try {
                     synchronized(this){
+                        Log.d("waiting",millisec+"millisecdos");
                         wait(millisec);
                     }
                 }
