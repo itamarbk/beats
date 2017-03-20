@@ -1,7 +1,9 @@
 package com.example.user1.beatmaker;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED {
+        ActivityCompat.requestPermissions((Activity)this, new String[]{Manifest.permission.RECORD_AUDIO}, 123);}
 
         setContentView(R.layout.activity_main);
         {
