@@ -25,4 +25,12 @@
         android:id="@+id/btn_done"
         android:layout_below="@+id/btn_record"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="loop?"
+        android:id="@+id/btn_loop"
+        android:layout_below="@+id/btn_done"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

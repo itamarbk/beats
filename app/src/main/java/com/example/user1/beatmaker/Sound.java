@@ -29,11 +29,11 @@ public class Sound {
             sp.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
                 @Override
                 public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-
-                    sp.play(spid, 1, 1, 1, 0, 1);
-                    //soundpool.play(id,leftV,rightV,priority,loop,rate)
+                        sp.play(spid, 1, 1, 1, 0, 1);
+                        //soundpool.play(id,leftV,rightV,priority,loop,rate)
                 }
             });
+
         }
         else
             Toast.makeText(con,"you have not yet recorded this sound",Toast.LENGTH_SHORT).show();

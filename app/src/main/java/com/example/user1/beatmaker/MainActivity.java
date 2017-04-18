@@ -1,6 +1,10 @@
 package com.example.user1.beatmaker;
 
 import android.Manifest;
+<<<<<<< HEAD
+=======
+import android.app.Activity;
+>>>>>>> origin/master
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
@@ -33,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED {
+        ActivityCompat.requestPermissions((Activity)this, new String[]{Manifest.permission.RECORD_AUDIO}, 123);}
+
         setContentView(R.layout.activity_main);
         {
             //gpp3 is an easy media file type
@@ -46,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             sounds[7] = new Sound(new File(MainActivity.this.getFilesDir(), "sound8.gpp3"), (Button) findViewById(R.id.btn8));
             sounds[8] = new Sound(new File(MainActivity.this.getFilesDir(), "sound9.gpp3"), (Button) findViewById(R.id.btn9));
         }
+        Button btnBeat=(Button)findViewById(R.id.btn_beat);
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.RECORD_AUDIO)
@@ -71,6 +79,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+        btnBeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sounds[0].play(MainActivity.this);
+                assist.waitFor(2000);
+                sounds[1].play(MainActivity.this);
+            }
+        });
     }
 
 
