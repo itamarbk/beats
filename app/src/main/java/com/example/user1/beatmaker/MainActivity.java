@@ -1,11 +1,15 @@
 package com.example.user1.beatmaker;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.media.SoundPool;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -43,7 +47,12 @@ public class MainActivity extends AppCompatActivity {
             sounds[8] = new Sound(new File(MainActivity.this.getFilesDir(), "sound9.gpp3"), (Button) findViewById(R.id.btn9));
         }
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.RECORD_AUDIO}, 1);
+        }
 
         for(final Sound sound : sounds) {
             sound.getBtn().setOnClickListener(new View.OnClickListener() {
@@ -63,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+
 
 
     @Override
