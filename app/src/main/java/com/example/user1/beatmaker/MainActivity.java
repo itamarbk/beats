@@ -1,19 +1,19 @@
 package com.example.user1.beatmaker;
 
+<<<<<<< HEAD
 import android.Manifest;
 <<<<<<< HEAD
 =======
 import android.app.Activity;
 >>>>>>> origin/master
+=======
+>>>>>>> parent of 5520b61... permissions deleted service
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.media.SoundPool;
 import android.net.Uri;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -55,12 +55,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Button btnBeat=(Button)findViewById(R.id.btn_beat);
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.RECORD_AUDIO)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.RECORD_AUDIO}, 1);
-        }
+
 
         for(final Sound sound : sounds) {
             sound.getBtn().setOnClickListener(new View.OnClickListener() {
@@ -88,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
     @Override
